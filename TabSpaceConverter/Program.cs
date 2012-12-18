@@ -26,13 +26,48 @@ namespace TabSpaceConverter
 					break;
 
 				if (action == Action.MakeSpaces)
-					line = line.Replace("\t", "    ");
+					line = ReplaceBeginning(line, "\t", "    ");
 
 				if (action == Action.MakeTabs)
-					line = line.Replace("    ", "\t");
+					line = ReplaceBeginning(line, "    ", "\t");
 
 				Console.WriteLine(line);
 			}
+		}
+
+		static string ReplaceBeginning(string text, string match, string newVal)
+		{
+			var res = new StringBuilder();
+
+			for (int i = 0; i < text.Length; )
+			{
+				if (Contains(text, match, i))
+				{
+					res.Append(newVal);
+					i += match.Length;
+				}
+				else
+				{
+					res.Append(text, i, text.Length - i);
+					break;
+				}
+			}
+
+			return res.ToString();
+		}
+
+		static bool Contains(string text, string match, int pos)
+		{
+			for (int i = pos; ; i++)
+			{
+				if (i - pos >= match.Length)
+					return true;
+				if (i >= text.Length)
+					break;
+				if (text[i] != match[i - pos])
+					return false;
+			}
+			return false;
 		}
 	}
 }
