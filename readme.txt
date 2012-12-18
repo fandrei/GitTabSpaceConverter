@@ -3,5 +3,5 @@ run the GitSetup.bat file (it will register filter to convert spaces and tabs au
 add the following line to the ".git/info/attributes" file of every project you need to convert tabs/spaces for (add other file types as well)
 *.cs  filter=TabsVsSpaces
 
-to convert all existing local copy files, use this command:
+to convert all existing working copy files, use this command:
 git checkout HEAD -- **
